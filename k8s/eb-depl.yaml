@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eb-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: eb
+  template:
+    metadata:
+      labels:
+        app: eb
+    spec:
+      containers:
+      - name: eb-container
+        image: gtldhawalgandhi/eb
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eb-svc
+spec:
+  selector:
+    app: eb
+  type: ClusterIP # This is default so not required
+  ports:
+    - name: eb
+      protocol: TCP
+      port: 4005
+      targetPort: 4005
+

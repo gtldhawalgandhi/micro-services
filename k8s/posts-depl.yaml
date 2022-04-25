@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: posts # match pods with label "app: posts"
+  template:
+    metadata:
+      labels:
+        app: posts # Create the label that deployment will look for (we are using this on line #9)
+    spec:
+      containers:
+      - name: posts-container
+        image: gtldhawalgandhi/posts
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-svc
+spec:
+  type: NodePort
+  selector:
+    app: posts
+  ports:
+    - protocol: TCP
+      name: posts
+      port: 4000
+      targetPort: 4000

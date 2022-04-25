@@ -1,0 +1,6 @@
+React: cd ~/mi-svc/client ; docker build -t gtldhawalgandhi/client . ; docker push gtldhawalgandhi/client
+queryService: cd ~/mi-svc/query ; docker build -t gtldhawalgandhi/query . ; docker push gtldhawalgandhi/query
+EventBroker: cd ~/mi-svc/event-broker ; docker build -t gtldhawalgandhi/eb . ; docker push gtldhawalgandhi/eb   
+postsService: cd ~/mi-svc/posts ; docker build -t gtldhawalgandhi/posts . ; docker push gtldhawalgandhi/posts   
+commentsService: cd ~/mi-svc/comments ; docker build -t gtldhawalgandhi/comments . ; docker push gtldhawalgandhi/comments   
+cfService: cd ~/mi-svc/content-filter ; docker build -t gtldhawalgandhi/cf . ; docker push gtldhawalgandhi/cf   

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cf-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: cf # match pods with label "app: cf"
+  template:
+    metadata:
+      labels:
+        app: cf # Create the label that deployment will look for (we are using this on line #9)
+    spec:
+      containers:
+      - name: cf-container
+        image: gtldhawalgandhi/cf
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cf-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: cf # match pods with label "app: cf"
+  ports:
+    - name: cf # For logs
+      protocol: TCP
+      port: 4003
+      targetPort: 4003
