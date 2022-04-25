@@ -20,39 +20,53 @@
 
 ## System level Caddy config
 
-    ```
+```Caddyfile
 :80 {
   @post_postservice {
-    method POST
-    path /posts
+      method POST
+      path /posts
   }
   reverse_proxy @post_postservice localhost:3xxxx
-
+  
   @get_queryservice {
-    method GET
-    path /posts
+      method GET
+      path /posts
   }
   reverse_proxy @get_queryservice localhost:3xxxx
-
+  
   @post_commentservice {
-    method POST
-    path /posts/*
+      method POST
+      path /posts/*
   }
- 
- reverse_proxy @post_commentservice localhost:3xxxx
-
+  reverse_proxy @post_commentservice localhost:3xxxx
+  
   @get_all {
-    method GET
-    path *
+      method GET
+      path *
   }
   reverse_proxy @get_all localhost:3xxxx
 }
-
-
-    ```
+```
 
 ## Kubernetes
 
 ### Using [K0s](https://docs.k0sproject.io/) distribution for this session.
+### Assuming K0s was installed
+
+    sudo k0s start
 
 ### All k8s commands will be run inside the k8s directory
+
+    ## Apply all yaml files at once
+    sudo k0s kubectl apply -f .
+
+######
+    sudo k0s kubectl get pods
+######
+    # List all services
+    sudo k0s kubectl get svc
+######
+    sudo k0s stop
+######
+    ## Remove all k8s from machine
+    sudo k0s reset
